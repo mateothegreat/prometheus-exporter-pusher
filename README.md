@@ -17,7 +17,7 @@ This role will create a new AWS VPC including:
 ## Requirements
 
 ```bash
-pip install ansible boto3 boto
+pip install ansible
 ```
 ## Variables
 
