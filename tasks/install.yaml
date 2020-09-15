@@ -1,0 +1,23 @@
+- name: "Install epel-relesea"
+  become: "true"
+  yum:
+    name: "epel-release"
+
+- name: "Install curl"
+  become: "true"
+  yum:
+    name: "curl"
+
+- name: "Install cronjob script"
+  become: "true"
+  template:
+    src: "prometheus-exporter-pusher.sh.j2"
+    dest: "/usr/local/bin/prometheus-exporter-pusher.sh"
+    mode: "0755"
+
+- name: "Install cronjob prometheus-exporter-pusher.sh"
+  become: "true"
+  cron:
+    name: "prometheus-exporter-pusher"
+    user: "{{ prometheus_exporter_pusher.user | default('prometheus') }}"
+    job: "/usr/local/bin/prometheus-exporter-pusher.sh"

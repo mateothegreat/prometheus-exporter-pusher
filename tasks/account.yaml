@@ -1,0 +1,13 @@
+---
+- name: "Create group ({{ prometheus_exporter_pusher.group | default('prometheus') }})"
+  become: "true"
+  group:
+    name: "{{ prometheus_exporter_pusher.group | default('prometheus') }}"
+
+- name: "Create user ({{ prometheus_exporter_pusher.user | default('prometheus') }})"
+  become: "true"
+  user:
+    name: "{{ prometheus_exporter_pusher.user | default('prometheus') }}"
+    create_home: "no"
+    group: "{{ prometheus_exporter_pusher.group | default('prometheus') }}"
+    shell: "/bin/false"
